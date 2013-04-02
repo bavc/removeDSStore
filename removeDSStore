@@ -1,0 +1,16 @@
+#!/bin/bash
+# @name removeDSStore
+# @author Dave Rice
+# @description The script accepts one of many folders as arguments, then searches for .DS_Store files in each one, and deletes all of them.
+# @version 1.0
+scriptname=$(basename $0)
+while [ "$*" != "" ] ; do
+	target=$1
+	if [ -d "$target" ]; then
+		echo "$scriptname: Attempting to remove .DS_Store files from $target"
+		find "$target" -name '.DS_Store' -type f -delete -exec echo ' Removing: {}' \;
+	else
+		echo "$scriptname: Skipping $target, not a directory."
+	fi
+	shift
+done
